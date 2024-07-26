@@ -3,22 +3,20 @@
   height: 120px;
   display: flex;
   align-items: center;
-justify-content: center;
-background-color: black;
+  justify-content: center;
+  background-color: rgb(179, 179, 179);
+  border-radius: 0 0 10% 10%;
+}
+
+.cajaImagen {
+  position: absolute;
+  left: 10vw;
 }
 
 .logo {
-  width: 100px;
-  position: absolute;
-  left: 15px;
-  top: 15px;
-  margin-left: 10px;
+  width: 110px;
 }
 
 .texto {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 3rem;
+  font-size: 4rem;
 }

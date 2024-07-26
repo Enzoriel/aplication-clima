@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <header className={styles.contenedor}>
-      <div>
+      <div className={styles.cajaImagen}>
         <Link to="/">
           <img
             className={styles.logo}
@@ -13,7 +13,9 @@ const Header = () => {
           />
         </Link>
       </div>
-      <div className={styles.texto}>Aplicación del clima</div>
+      <div className={styles.texto}>
+        <h1>Aplicación del clima</h1>
+      </div>
     </header>
   );
 };
