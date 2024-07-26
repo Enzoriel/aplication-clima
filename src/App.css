@@ -2,3 +2,9 @@
   margin: 0 auto;
   padding: 0;
 }
+
+.widget {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}

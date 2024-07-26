@@ -29,6 +29,8 @@ const currentAPI = async (url) => {
 function App() {
   const [country, setCountry] = useState("");
   const [coordenadas, setCoordenadas] = useState(null);
+  const [idCiudad, setIdCiudad] = useState("");
+  const [widgetKey, setWidgetKey] = useState(0);
 
   const añadirCiudad = (ciudad) => {
     setCountry(ciudad);
@@ -38,12 +40,39 @@ function App() {
   };
 
   useEffect(() => {
+    if (idCiudad) {
+      window.myWidgetParam = [
+        {
+          id: 11,
+          cityid: idCiudad,
+          appid: "737a2a02372e2430345c2fd6515fc51b",
+          units: "metric",
+          containerid: "openweathermap-widget-11",
+        },
+      ];
+
+      const script = document.createElement("script");
+      script.async = true;
+      script.charset = "utf-8";
+      script.src =
+        "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
+      document.body.appendChild(script);
+
+      setWidgetKey((prevKey) => prevKey + 1);
+
+      return () => {
+        document.body.removeChild(script);
+      };
+    }
+  }, [idCiudad]);
+
+  useEffect(() => {
     if (coordenadas) {
       const latitud = coordenadas.lat;
       const longitud = coordenadas.lon;
       const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitud}&lon=${longitud}&appid=${key}&lang=sp, es`;
       currentAPI(url).then((datos) => {
-        console.log(datos);
+        setIdCiudad(datos.id);
       });
     }
   }, [coordenadas]);
@@ -66,6 +95,7 @@ function App() {
     <>
       <Header />
       <Home ciudad={añadirCiudad} />
+      <div className="widget" key={widgetKey} id="openweathermap-widget-11"></div>
     </>
   );
 }
